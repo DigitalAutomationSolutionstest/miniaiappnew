@@ -2,6 +2,8 @@ import { NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
+export const dynamic = 'force-dynamic'
+
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.miniaiapps.tech'
 
 export async function POST(request: Request, { params }: { params: { tool: string } }) {

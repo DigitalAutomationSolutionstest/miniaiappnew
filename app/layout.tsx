@@ -1,4 +1,4 @@
-import type { Metadata } from 'next'
+import Metadata from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -8,9 +8,11 @@ import { Footer } from '@/components/Footer'
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
-  title: 'Mini AI Apps - Piattaforma di mini-applicazioni AI',
+  title: 'Mini Ai App – Intelligenza artificiale su misura',
   description:
-    "Accedi a 5 potenti strumenti AI in un'unica dashboard. Scegli quello che ti serve e inizia subito.",
+    "Crea il tuo sito web o la tua app AI su misura con Digital Automaton Solutions. Utilizza anche le nostre potenti mini-app AI pronte all'uso.",
+  authors: [{ name: 'Digital Automaton Solutions' }],
+  keywords: 'intelligenza artificiale, sviluppo web, app ai, siti web, openai, custom software',
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

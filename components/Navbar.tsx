@@ -15,16 +15,22 @@ export function Navbar() {
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <nav className="flex items-center space-x-6">
             <Link
-              href="/services"
+              href="/"
               className="text-sm font-medium transition-colors hover:text-primary"
             >
-              Servizi
+              Home
             </Link>
             <Link
-              href="/contact"
+              href="/#features"
               className="text-sm font-medium transition-colors hover:text-primary"
             >
-              Contatti
+              Mini App AI
+            </Link>
+            <Link
+              href="/services"
+              className="text-sm font-bold text-primary underline underline-offset-4 decoration-wavy transition-colors hover:text-primary/80"
+            >
+              Richiedi Progetto
             </Link>
             <ThemeToggle />
           </nav>

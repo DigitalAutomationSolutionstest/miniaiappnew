@@ -1,122 +1,48 @@
 'use client'
 
-import { useState } from 'react'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Button } from '@/components/ui/button'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent } from '@/components/ui/card'
-import {
-  Select,
-  SelectTrigger,
-  SelectValue,
-  SelectContent,
-  SelectItem,
-} from '@/components/ui/select'
+import { motion } from 'framer-motion'
+import CustomProjectForm from '@/components/CustomProjectForm'
+import { Footer } from '@/components/Footer'
+import { Navbar } from '@/components/Navbar'
 
 export default function ServicesPage() {
-  const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    type: '',
-    budget: '',
-    message: '',
-  })
-
-  const [loading, setLoading] = useState(false)
-  const [success, setSuccess] = useState(false)
-
-  const handleChange = (field: string, value: string) => {
-    setFormData((prev) => ({ ...prev, [field]: value }))
-  }
-
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setLoading(true)
-
-    const res = await fetch('/api/contact', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(formData),
-    })
-
-    if (res.ok) {
-      setSuccess(true)
-      setFormData({ name: '', email: '', type: '', budget: '', message: '' })
-    }
-
-    setLoading(false)
-  }
-
   return (
-    <div className="max-w-2xl mx-auto py-12 px-4">
-      <h1 className="text-4xl font-bold mb-4">Hai un'idea? Noi la costruiamo per te</h1>
-      <p className="mb-8 text-muted-foreground">
-        Creiamo siti web professionali e mini-app AI su misura per te. Parlaci del tuo progetto, ti
-        ricontatteremo entro 24h.
-      </p>
+    <div className="min-h-screen flex flex-col">
+      <Navbar />
+      <main className="flex-grow pt-24 pb-16">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5, ease: 'easeOut' }}
+          className="py-10 text-center max-w-3xl mx-auto px-4"
+        >
+          <h1 className="text-4xl font-bold mb-4 leading-tight sm:text-5xl bg-gradient-to-r from-primary to-secondary text-transparent bg-clip-text">
+            Progetti su misura con potenza AI
+          </h1>
+          <p className="text-muted-foreground text-lg sm:text-xl mb-6">
+            Richiedi un sito web, una piattaforma o una mini-app AI completamente personalizzata.
+            Ti guideremo passo passo, dal concept alla pubblicazione.
+          </p>
+          <ul className="text-left text-base font-medium space-y-3 mb-10 list-disc list-inside marker:text-primary">
+            <li>✅ Sviluppo ultra-veloce (garantito in 3–10 giorni)</li>
+            <li>✅ Design professionale e responsive, curato nei minimi dettagli</li>
+            <li>✅ Intelligenza Artificiale integrata (OpenAI, Whisper, Hugging Face)</li>
+            <li>✅ Preventivo chiaro e dettagliato, senza sorprese</li>
+            <li>✅ Supporto umano dedicato, via chat o email, sempre disponibile</li>
+          </ul>
+        </motion.section>
 
-      <div className="grid gap-4 mb-8">
-        <Card>
-          <CardContent className="p-4">🌐 Siti web responsive</CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">🤖 Mini-app AI personalizzate</CardContent>
-        </Card>
-        <Card>
-          <CardContent className="p-4">⚙️ Integrazioni API e automazioni</CardContent>
-        </Card>
-      </div>
-
-      <form onSubmit={handleSubmit} className="grid gap-4">
-        <div>
-          <Label>Nome</Label>
-          <Input
-            value={formData.name}
-            onChange={(e) => handleChange('name', e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <Label>Email</Label>
-          <Input
-            type="email"
-            value={formData.email}
-            onChange={(e) => handleChange('email', e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <Label>Tipo di progetto</Label>
-          <Select value={formData.type} onValueChange={(value) => handleChange('type', value)}>
-            <SelectTrigger>
-              <SelectValue placeholder="Seleziona un tipo" />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="Sito web">Sito web</SelectItem>
-              <SelectItem value="Mini-app AI">Mini-app AI</SelectItem>
-              <SelectItem value="Altro">Altro</SelectItem>
-            </SelectContent>
-          </Select>
-        </div>
-        <div>
-          <Label>Budget indicativo</Label>
-          <Input value={formData.budget} onChange={(e) => handleChange('budget', e.target.value)} />
-        </div>
-        <div>
-          <Label>Messaggio</Label>
-          <Textarea
-            rows={4}
-            value={formData.message}
-            onChange={(e) => handleChange('message', e.target.value)}
-            required
-          />
-        </div>
-        <Button type="submit" disabled={loading}>
-          {loading ? 'Invio...' : 'Invia richiesta'}
-        </Button>
-        {success && <p className="text-green-600">Richiesta inviata con successo!</p>}
-      </form>
+        <motion.div
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6, delay: 0.2, ease: 'easeOut' }}
+          viewport={{ once: true, amount: 0.2 }}
+          className="max-w-3xl mx-auto px-4"
+        >
+          <CustomProjectForm />
+        </motion.div>
+      </main>
+      <Footer />
     </div>
   )
 }

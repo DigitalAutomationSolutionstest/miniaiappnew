@@ -1,65 +1,54 @@
 'use client'
 
 import { motion } from 'framer-motion'
+import Link from 'next/link'
+import { Button } from '@/components/ui/button'
 import { WaitlistForm } from './WaitlistForm'
 
-export function Hero() {
+interface CtaProps {
+  text: string
+  href: string
+}
+
+interface HeroProps {
+  title: string
+  subtitle: string
+  cta1?: CtaProps
+  cta2?: CtaProps
+}
+
+export function Hero({ title, subtitle, cta1, cta2 }: HeroProps) {
   return (
-    <div className="relative overflow-hidden">
-      <div className="mx-auto max-w-7xl px-6 pb-24 pt-10 sm:pb-32 lg:flex lg:px-8 lg:py-40">
+    <section className="relative isolate overflow-hidden bg-gradient-to-b from-primary/10 via-background to-background pt-14 pb-20 sm:pb-32">
+      <div className="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-background shadow-xl shadow-primary/10 ring-1 ring-primary/5 sm:-mr-80 lg:-mr-96" />
+      <div className="mx-auto max-w-7xl px-6 py-32 sm:py-40 lg:px-8">
         <motion.div
-          className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8"
-          initial={{ opacity: 0, x: -20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="mx-auto max-w-2xl lg:mx-0 lg:grid lg:max-w-none lg:grid-cols-2 lg:gap-x-16 lg:gap-y-6 xl:grid-cols-1 xl:grid-rows-1"
         >
-          <div className="mt-24 sm:mt-32 lg:mt-16">
-            <a href="#" className="inline-flex space-x-6">
-              <span className="rounded-full bg-indigo-500/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-indigo-500/20">
-                Nuovo
-              </span>
-              <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-muted-foreground">
-                <span>Mini Ai App è ora disponibile</span>
-                <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path
-                    fillRule="evenodd"
-                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
-                    clipRule="evenodd"
-                  />
-                </svg>
-              </span>
-            </a>
-          </div>
-          <h1 className="mt-10 text-4xl font-bold tracking-tight sm:text-6xl">
-            L'intelligenza artificiale a tua disposizione. In mini-app intuitive e potenti.
+          <h1 className="max-w-2xl text-4xl font-bold tracking-tight sm:text-6xl lg:col-span-2 xl:col-auto bg-gradient-to-r from-foreground to-muted-foreground text-transparent bg-clip-text">
+            {title}
           </h1>
-          <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Accedi a 5 potenti strumenti AI in un'unica dashboard. Chatbot, generazione siti,
-            assistente codice, trascrizione audio e analisi CSV.
-          </p>
-          <div className="mt-10 flex items-center gap-x-6">
-            <a
-              href="https://app.miniaiapp.com"
-              className="rounded-md bg-indigo-600 px-3.5 py-2.5 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600"
-            >
-              Inizia Gratis
-            </a>
-            <a href="#features" className="text-sm font-semibold leading-6">
-              Scopri di più <span aria-hidden="true">→</span>
-            </a>
-          </div>
-        </motion.div>
-        <motion.div
-          className="mx-auto mt-16 flex max-w-2xl sm:mt-24 lg:ml-10 lg:mr-0 lg:mt-0 lg:max-w-none lg:flex-none xl:ml-32"
-          initial={{ opacity: 0, x: 20 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <div className="max-w-3xl flex-none sm:max-w-5xl lg:max-w-none">
-            <WaitlistForm />
+          <div className="mt-6 max-w-xl lg:mt-0 xl:col-end-1 xl:row-start-1">
+            <p className="text-lg leading-8 text-muted-foreground">{subtitle}</p>
+            <div className="mt-10 flex items-center gap-x-6">
+              {cta1 && (
+                <Button asChild size="lg">
+                  <Link href={cta1.href}>{cta1.text}</Link>
+                </Button>
+              )}
+              {cta2 && (
+                <Button asChild variant="outline" size="lg">
+                  <Link href={cta2.href}>{cta2.text}</Link>
+                </Button>
+              )}
+            </div>
           </div>
         </motion.div>
       </div>
-    </div>
+      <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-background sm:h-32" />
+    </section>
   )
 }
