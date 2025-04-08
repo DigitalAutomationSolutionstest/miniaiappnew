@@ -32,7 +32,7 @@ export function WaitlistForm() {
       setSuccess(true)
       setEmail('')
     } catch (err) {
-      setError('Errore durante l\'iscrizione. Riprova più tardi.')
+      setError("Errore durante l'iscrizione. Riprova più tardi.")
     } finally {
       setLoading(false)
     }
@@ -77,4 +77,4 @@ export function WaitlistForm() {
       )}
     </motion.form>
   )
-} 
+}

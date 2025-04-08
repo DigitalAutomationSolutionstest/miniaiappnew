@@ -15,7 +15,11 @@ export default function Sidebar() {
     <aside className="w-60 h-screen p-4 border-r hidden md:block bg-gray-50">
       <nav className="space-y-2">
         {items.map(({ href, label, icon }) => (
-          <Link key={href} href={href} className="flex items-center space-x-2 text-gray-700 hover:text-black">
+          <Link
+            key={href}
+            href={href}
+            className="flex items-center space-x-2 text-gray-700 hover:text-black"
+          >
             {icon}
             <span>{label}</span>
           </Link>
@@ -23,4 +27,4 @@ export default function Sidebar() {
       </nav>
     </aside>
   )
-} 
+}

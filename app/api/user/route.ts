@@ -5,13 +5,12 @@ import { cookies } from 'next/headers'
 export async function GET() {
   try {
     const supabase = createServerComponentClient({ cookies })
-    const { data: { user } } = await supabase.auth.getUser()
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
 
     if (!user) {
-      return NextResponse.json(
-        { error: 'Non autorizzato' },
-        { status: 401 }
-      )
+      return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
     }
 
     // Recupera i dati dell'utente
@@ -23,10 +22,7 @@ export async function GET() {
 
     if (userError) {
       console.error('Errore recupero dati utente:', userError)
-      return NextResponse.json(
-        { error: 'Errore nel recupero dei dati' },
-        { status: 500 }
-      )
+      return NextResponse.json({ error: 'Errore nel recupero dei dati' }, { status: 500 })
     }
 
     // Aggiorna last_login
@@ -42,13 +38,10 @@ export async function GET() {
     return NextResponse.json({
       email: user.email,
       credits: userData?.credits || 0,
-      lastLogin: userData?.last_login || new Date().toISOString()
+      lastLogin: userData?.last_login || new Date().toISOString(),
     })
   } catch (error) {
     console.error('Errore route user:', error)
-    return NextResponse.json(
-      { error: 'Errore interno del server' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Errore interno del server' }, { status: 500 })
   }
-} 
+}

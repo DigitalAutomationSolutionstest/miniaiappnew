@@ -9,14 +9,11 @@ const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
   title: 'Mini AI Apps - Piattaforma di mini-applicazioni AI',
-  description: 'Accedi a 5 potenti strumenti AI in un\'unica dashboard. Scegli quello che ti serve e inizia subito.',
+  description:
+    "Accedi a 5 potenti strumenti AI in un'unica dashboard. Scegli quello che ti serve e inizia subito.",
 }
 
-export default function RootLayout({
-  children,
-}: {
-  children: React.ReactNode
-}) {
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="it" suppressHydrationWarning>
       <body className={inter.className}>
@@ -35,4 +32,4 @@ export default function RootLayout({
       </body>
     </html>
   )
-} 
+}

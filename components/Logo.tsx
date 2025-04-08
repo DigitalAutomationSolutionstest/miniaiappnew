@@ -8,4 +8,4 @@ export function Logo() {
       </span>
     </Link>
   )
-} 
+}

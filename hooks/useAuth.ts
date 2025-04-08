@@ -16,7 +16,9 @@ export function useAuth() {
     })
 
     // Ascolta i cambiamenti di autenticazione
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+    const {
+      data: { subscription },
+    } = supabase.auth.onAuthStateChange((_event, session) => {
       setUser(session?.user ?? null)
       setLoading(false)
     })
@@ -55,4 +57,4 @@ export function useAuth() {
     signUp,
     signOut,
   }
-} 
+}

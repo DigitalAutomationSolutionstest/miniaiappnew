@@ -8,10 +8,7 @@ export async function POST(request: Request) {
     const { name, email, message } = await request.json()
 
     if (!email || !message) {
-      return NextResponse.json(
-        { error: 'Email e messaggio obbligatori' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Email e messaggio obbligatori' }, { status: 400 })
     }
 
     // Invia email al team
@@ -25,7 +22,7 @@ export async function POST(request: Request) {
         <p><strong>Email:</strong> ${email}</p>
         <p><strong>Messaggio:</strong></p>
         <p>${message}</p>
-      `
+      `,
     })
 
     // Invia email di conferma all'utente
@@ -40,15 +37,12 @@ export async function POST(request: Request) {
         <p>Ecco un riepilogo del tuo messaggio:</p>
         <p>${message}</p>
         <p>A presto!<br>Il Team di Mini Ai App</p>
-      `
+      `,
     })
 
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Errore invio email:', error)
-    return NextResponse.json(
-      { error: 'Errore nell\'invio dell\'email' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: "Errore nell'invio dell'email" }, { status: 500 })
   }
-} 
+}

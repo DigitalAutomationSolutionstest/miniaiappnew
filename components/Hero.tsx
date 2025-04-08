@@ -21,7 +21,11 @@ export function Hero() {
               <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-muted-foreground">
                 <span>Mini Ai App è ora disponibile</span>
                 <svg className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                  <path fillRule="evenodd" d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z" clipRule="evenodd" />
+                  <path
+                    fillRule="evenodd"
+                    d="M7.21 14.77a.75.75 0 01.02-1.06L11.168 10 7.23 6.29a.75.75 0 111.04-1.08l4.5 4.25a.75.75 0 010 1.08l-4.5 4.25a.75.75 0 01-1.06-.02z"
+                    clipRule="evenodd"
+                  />
                 </svg>
               </span>
             </a>
@@ -30,7 +34,8 @@ export function Hero() {
             L'intelligenza artificiale a tua disposizione. In mini-app intuitive e potenti.
           </h1>
           <p className="mt-6 text-lg leading-8 text-muted-foreground">
-            Accedi a 5 potenti strumenti AI in un'unica dashboard. Chatbot, generazione siti, assistente codice, trascrizione audio e analisi CSV.
+            Accedi a 5 potenti strumenti AI in un'unica dashboard. Chatbot, generazione siti,
+            assistente codice, trascrizione audio e analisi CSV.
           </p>
           <div className="mt-10 flex items-center gap-x-6">
             <a
@@ -57,4 +62,4 @@ export function Hero() {
       </div>
     </div>
   )
-} 
+}

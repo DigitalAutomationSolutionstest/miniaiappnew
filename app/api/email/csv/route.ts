@@ -8,10 +8,7 @@ export async function POST(request: Request) {
     const { email, result } = await request.json()
 
     if (!email || !result) {
-      return NextResponse.json(
-        { error: 'Dati mancanti' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Dati mancanti' }, { status: 400 })
     }
 
     await resend.emails.send({
@@ -27,15 +24,12 @@ export async function POST(request: Request) {
         <p>Puoi copiare il risultato e utilizzarlo come preferisci.</p>
         <p>Se hai bisogno di altre analisi, non esitare a tornare sul nostro sito!</p>
         <p>A presto!<br>Il Team di Mini Ai App</p>
-      `
+      `,
     })
 
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Errore invio email:', error)
-    return NextResponse.json(
-      { error: 'Errore nell\'invio dell\'email' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: "Errore nell'invio dell'email" }, { status: 500 })
   }
-} 
+}

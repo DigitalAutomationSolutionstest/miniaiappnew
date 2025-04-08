@@ -14,36 +14,37 @@ const toolConfigs = {
     title: 'Chat AI',
     description: 'Chatta con un assistente AI intelligente',
     placeholder: 'Scrivi il tuo messaggio...',
-    outputPlaceholder: 'La risposta apparirà qui...'
+    outputPlaceholder: 'La risposta apparirà qui...',
   },
   code: {
     title: 'Generatore di Codice',
     description: 'Genera codice in vari linguaggi di programmazione',
     placeholder: 'Descrivi cosa vuoi che il codice faccia...',
-    outputPlaceholder: 'Il codice generato apparirà qui...'
+    outputPlaceholder: 'Il codice generato apparirà qui...',
   },
   transcribe: {
     title: 'Trascrittore Audio',
     description: 'Trascrivi audio in testo',
-    placeholder: 'Inserisci il link dell\'audio...',
-    outputPlaceholder: 'La trascrizione apparirà qui...'
+    placeholder: "Inserisci il link dell'audio...",
+    outputPlaceholder: 'La trascrizione apparirà qui...',
   },
   sitegen: {
     title: 'Generatore di Siti',
     description: 'Genera siti web completi',
     placeholder: 'Descrivi il sito che vuoi creare...',
-    outputPlaceholder: 'Il codice del sito apparirà qui...'
+    outputPlaceholder: 'Il codice del sito apparirà qui...',
   },
   csv: {
     title: 'Analizzatore CSV',
     description: 'Analizza e visualizza dati CSV',
     placeholder: 'Inserisci il tuo CSV...',
-    outputPlaceholder: 'L\'analisi apparirà qui...'
-  }
+    outputPlaceholder: "L'analisi apparirà qui...",
+  },
 }
 
 export default function MiniAppPage() {
-  const { tool } = useParams()
+  const params = useParams()
+  const tool = params?.tool as string
   const [input, setInput] = useState('')
   const [output, setOutput] = useState('')
   const [loading, setLoading] = useState(false)
@@ -85,21 +86,17 @@ export default function MiniAppPage() {
       <Card className="p-6">
         <h1 className="text-3xl font-bold mb-2">{config.title}</h1>
         <p className="text-muted-foreground mb-6">{config.description}</p>
-        
+
         <div className="space-y-4">
-          <Textarea 
-            value={input} 
-            onChange={e => setInput(e.target.value)} 
+          <Textarea
+            value={input}
+            onChange={(e) => setInput(e.target.value)}
             placeholder={config.placeholder}
             className="min-h-[150px]"
           />
-          
+
           <div className="flex justify-end">
-            <Button 
-              onClick={handleSubmit} 
-              disabled={loading}
-              className="w-full sm:w-auto"
-            >
+            <Button onClick={handleSubmit} disabled={loading} className="w-full sm:w-auto">
               {loading ? (
                 <>
                   <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -111,9 +108,9 @@ export default function MiniAppPage() {
             </Button>
           </div>
 
-          <Textarea 
-            readOnly 
-            value={output} 
+          <Textarea
+            readOnly
+            value={output}
             placeholder={config.outputPlaceholder}
             className="min-h-[200px] bg-muted"
           />
@@ -121,4 +118,4 @@ export default function MiniAppPage() {
       </Card>
     </div>
   )
-} 
+}

@@ -6,7 +6,13 @@ import { Textarea } from '@/components/ui/textarea'
 import { Button } from '@/components/ui/button'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent } from '@/components/ui/card'
-import { Select, SelectTrigger, SelectValue, SelectContent, SelectItem } from '@/components/ui/select'
+import {
+  Select,
+  SelectTrigger,
+  SelectValue,
+  SelectContent,
+  SelectItem,
+} from '@/components/ui/select'
 
 export default function ServicesPage() {
   const [formData, setFormData] = useState({
@@ -21,7 +27,7 @@ export default function ServicesPage() {
   const [success, setSuccess] = useState(false)
 
   const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
+    setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -46,7 +52,8 @@ export default function ServicesPage() {
     <div className="max-w-2xl mx-auto py-12 px-4">
       <h1 className="text-4xl font-bold mb-4">Hai un'idea? Noi la costruiamo per te</h1>
       <p className="mb-8 text-muted-foreground">
-        Creiamo siti web professionali e mini-app AI su misura per te. Parlaci del tuo progetto, ti ricontatteremo entro 24h.
+        Creiamo siti web professionali e mini-app AI su misura per te. Parlaci del tuo progetto, ti
+        ricontatteremo entro 24h.
       </p>
 
       <div className="grid gap-4 mb-8">
@@ -64,20 +71,24 @@ export default function ServicesPage() {
       <form onSubmit={handleSubmit} className="grid gap-4">
         <div>
           <Label>Nome</Label>
-          <Input value={formData.name} onChange={e => handleChange('name', e.target.value)} required />
+          <Input
+            value={formData.name}
+            onChange={(e) => handleChange('name', e.target.value)}
+            required
+          />
         </div>
         <div>
           <Label>Email</Label>
           <Input
             type="email"
             value={formData.email}
-            onChange={e => handleChange('email', e.target.value)}
+            onChange={(e) => handleChange('email', e.target.value)}
             required
           />
         </div>
         <div>
           <Label>Tipo di progetto</Label>
-          <Select value={formData.type} onValueChange={value => handleChange('type', value)}>
+          <Select value={formData.type} onValueChange={(value) => handleChange('type', value)}>
             <SelectTrigger>
               <SelectValue placeholder="Seleziona un tipo" />
             </SelectTrigger>
@@ -90,14 +101,14 @@ export default function ServicesPage() {
         </div>
         <div>
           <Label>Budget indicativo</Label>
-          <Input value={formData.budget} onChange={e => handleChange('budget', e.target.value)} />
+          <Input value={formData.budget} onChange={(e) => handleChange('budget', e.target.value)} />
         </div>
         <div>
           <Label>Messaggio</Label>
           <Textarea
             rows={4}
             value={formData.message}
-            onChange={e => handleChange('message', e.target.value)}
+            onChange={(e) => handleChange('message', e.target.value)}
             required
           />
         </div>
@@ -108,4 +119,4 @@ export default function ServicesPage() {
       </form>
     </div>
   )
-} 
+}

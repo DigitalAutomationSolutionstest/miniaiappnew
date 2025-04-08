@@ -27,7 +27,9 @@ export default function PricingPage() {
             <li>✓ Fino a 5 richieste/giorno</li>
             <li>✓ Accesso a tutte le mini-app</li>
           </ul>
-          <Button onClick={() => handleCheckout('free')} disabled>Gratis</Button>
+          <Button onClick={() => handleCheckout('free')} disabled>
+            Gratis
+          </Button>
         </div>
         <div className="border p-6 rounded-2xl shadow-md bg-gray-50">
           <h2 className="text-xl font-semibold mb-2">Pro</h2>
@@ -52,4 +54,4 @@ export default function PricingPage() {
       </div>
     </div>
   )
-} 
+}

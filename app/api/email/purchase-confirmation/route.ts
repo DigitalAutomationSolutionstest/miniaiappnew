@@ -8,10 +8,7 @@ export async function POST(request: Request) {
     const { email, credits, amount } = await request.json()
 
     if (!email || !credits || !amount) {
-      return NextResponse.json(
-        { error: 'Dati mancanti' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Dati mancanti' }, { status: 400 })
     }
 
     await resend.emails.send({
@@ -32,15 +29,12 @@ export async function POST(request: Request) {
             Vai alla tua Dashboard
           </a>
         </p>
-      `
+      `,
     })
 
     return NextResponse.json({ success: true })
   } catch (error) {
     console.error('Errore invio email:', error)
-    return NextResponse.json(
-      { error: 'Errore nell\'invio dell\'email' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: "Errore nell'invio dell'email" }, { status: 500 })
   }
-} 
+}

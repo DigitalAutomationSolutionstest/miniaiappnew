@@ -1,11 +1,11 @@
 import { NextResponse } from 'next/server'
 import { headers } from 'next/headers'
 import Stripe from 'stripe'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
-  apiVersion: '2023-10-16'
+  apiVersion: '2025-03-31.basil',
 })
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
@@ -17,29 +17,36 @@ export async function POST(request: Request) {
     const signature = headersList.get('stripe-signature')
 
     if (!signature) {
-      return NextResponse.json(
-        { error: 'Firma mancante' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Firma mancante' }, { status: 400 })
     }
 
     let event: Stripe.Event
 
     try {
-      event = stripe.webhooks.constructEvent(
-        body,
-        signature,
-        webhookSecret
-      )
+      event = stripe.webhooks.constructEvent(body, signature, webhookSecret)
     } catch (err) {
       console.error('Errore verifica firma:', err)
-      return NextResponse.json(
-        { error: 'Firma non valida' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Firma non valida' }, { status: 400 })
     }
 
-    const supabase = createServerComponentClient({ cookies })
+    const cookieStore = cookies()
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          get(name: string) {
+            return cookieStore.get(name)?.value
+          },
+          set(name: string, value: string, options: any) {
+            cookieStore.set({ name, value, ...options })
+          },
+          remove(name: string, options: any) {
+            cookieStore.set({ name, value: '', ...options })
+          },
+        },
+      }
+    )
 
     switch (event.type) {
       case 'checkout.session.completed': {
@@ -52,10 +59,16 @@ export async function POST(request: Request) {
         }
 
         // Aggiorna i crediti dell'utente
+        const { data: currentUser } = await supabase
+          .from('users')
+          .select('credits')
+          .eq('id', userId)
+          .single()
+
         const { error: updateError } = await supabase
           .from('users')
-          .update({ 
-            credits: supabase.raw(`credits + ${credits}`)
+          .update({
+            credits: (currentUser?.credits || 0) + credits,
           })
           .eq('id', userId)
 
@@ -80,7 +93,7 @@ export async function POST(request: Request) {
             body: JSON.stringify({
               email: userData.email,
               credits,
-              amount: session.amount_total
+              amount: session.amount_total,
             }),
           })
         }
@@ -102,9 +115,6 @@ export async function POST(request: Request) {
     return NextResponse.json({ received: true })
   } catch (error) {
     console.error('Errore webhook:', error)
-    return NextResponse.json(
-      { error: 'Errore interno del server' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Errore interno del server' }, { status: 500 })
   }
-} 
+}

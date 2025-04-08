@@ -29,4 +29,4 @@ export function Card({ title, description, icon, href, delay = 0 }: CardProps) {
       </Link>
     </motion.div>
   )
-} 
+}

@@ -1,22 +1,35 @@
 import { NextResponse } from 'next/server'
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
+import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.miniaiapps.tech'
 
-export async function POST(
-  request: Request,
-  { params }: { params: { tool: string } }
-) {
+export async function POST(request: Request, { params }: { params: { tool: string } }) {
   try {
-    const supabase = createServerComponentClient({ cookies })
-    const { data: { user } } = await supabase.auth.getUser()
+    const cookieStore = cookies()
+    const supabase = createServerClient(
+      process.env.NEXT_PUBLIC_SUPABASE_URL!,
+      process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!,
+      {
+        cookies: {
+          get(name: string) {
+            return cookieStore.get(name)?.value
+          },
+          set(name: string, value: string, options: any) {
+            cookieStore.set({ name, value, ...options })
+          },
+          remove(name: string, options: any) {
+            cookieStore.set({ name, value: '', ...options })
+          },
+        },
+      }
+    )
+    const {
+      data: { user },
+    } = await supabase.auth.getUser()
 
     if (!user) {
-      return NextResponse.json(
-        { error: 'Non autorizzato' },
-        { status: 401 }
-      )
+      return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
     }
 
     // Verifica crediti
@@ -27,19 +40,13 @@ export async function POST(
       .single()
 
     if (!userData?.credits || userData.credits < 1) {
-      return NextResponse.json(
-        { error: 'Crediti insufficienti' },
-        { status: 402 }
-      )
+      return NextResponse.json({ error: 'Crediti insufficienti' }, { status: 402 })
     }
 
     const { input } = await request.json()
 
     if (!input?.trim()) {
-      return NextResponse.json(
-        { error: 'Input mancante' },
-        { status: 400 }
-      )
+      return NextResponse.json({ error: 'Input mancante' }, { status: 400 })
     }
 
     // Chiamata all'API FastAPI
@@ -47,9 +54,9 @@ export async function POST(
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
-        'Authorization': `Bearer ${process.env.API_KEY}`
+        Authorization: `Bearer ${process.env.API_KEY}`,
       },
-      body: JSON.stringify({ input })
+      body: JSON.stringify({ input }),
     })
 
     if (!response.ok) {
@@ -71,9 +78,6 @@ export async function POST(
     return NextResponse.json(data)
   } catch (error) {
     console.error(`Errore route AI ${params.tool}:`, error)
-    return NextResponse.json(
-      { error: 'Errore nella chiamata AI' },
-      { status: 500 }
-    )
+    return NextResponse.json({ error: 'Errore nella chiamata AI' }, { status: 500 })
   }
-} 
+}

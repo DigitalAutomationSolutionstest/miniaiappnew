@@ -45,13 +45,13 @@ const steps = [
     icon: '✨',
   },
   {
-    title: 'Scegli l\'app',
+    title: "Scegli l'app",
     description: 'Seleziona lo strumento AI che ti serve',
     icon: '🎯',
   },
   {
-    title: 'Usa l\'AI',
-    description: 'Inizia a utilizzare l\'intelligenza artificiale',
+    title: "Usa l'AI",
+    description: "Inizia a utilizzare l'intelligenza artificiale",
     icon: '🚀',
   },
 ]
@@ -64,7 +64,7 @@ const benefits = [
   },
   {
     title: 'Velocità',
-    description: 'Risultati istantanei con l\'AI',
+    description: "Risultati istantanei con l'AI",
     icon: '⚡',
   },
   {
@@ -78,7 +78,7 @@ export default function Home() {
   return (
     <div className="min-h-screen">
       <Hero />
-      
+
       {/* Apps Section */}
       <section id="features" className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
@@ -87,7 +87,8 @@ export default function Home() {
               Le tue mini-app AI preferite
             </h2>
             <p className="mt-6 text-lg leading-8 text-muted-foreground">
-              Accedi a 5 potenti strumenti AI in un'unica dashboard. Scegli quello che ti serve e inizia subito.
+              Accedi a 5 potenti strumenti AI in un'unica dashboard. Scegli quello che ti serve e
+              inizia subito.
             </p>
           </div>
           <div className="mx-auto mt-16 grid max-w-2xl grid-cols-1 gap-6 sm:mt-20 lg:mx-0 lg:max-w-none lg:grid-cols-3">
@@ -102,9 +103,7 @@ export default function Home() {
       <section className="py-24 sm:py-32 bg-muted/50">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Come funziona
-            </h2>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Come funziona</h2>
             <p className="mt-6 text-lg leading-8 text-muted-foreground">
               Inizia a utilizzare Mini Ai App in tre semplici passaggi
             </p>
@@ -132,9 +131,7 @@ export default function Home() {
       <section className="py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">
-              Perché Mini Ai App
-            </h2>
+            <h2 className="text-3xl font-bold tracking-tight sm:text-4xl">Perché Mini Ai App</h2>
             <p className="mt-6 text-lg leading-8 text-muted-foreground">
               La piattaforma AI più semplice e potente per le tue esigenze
             </p>
@@ -161,4 +158,4 @@ export default function Home() {
       <Footer />
     </div>
   )
-} 
+}

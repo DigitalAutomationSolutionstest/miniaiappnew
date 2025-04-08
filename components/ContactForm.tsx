@@ -18,7 +18,7 @@ export function ContactForm() {
   const [error, setError] = useState('')
 
   const handleChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }))
+    setFormData((prev) => ({ ...prev, [field]: value }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -33,12 +33,12 @@ export function ContactForm() {
         body: JSON.stringify(formData),
       })
 
-      if (!res.ok) throw new Error('Errore durante l\'invio')
+      if (!res.ok) throw new Error("Errore durante l'invio")
 
       setSuccess(true)
       setFormData({ name: '', email: '', message: '' })
     } catch (err) {
-      setError('Errore durante l\'invio. Riprova più tardi.')
+      setError("Errore durante l'invio. Riprova più tardi.")
     } finally {
       setLoading(false)
     }
@@ -104,4 +104,4 @@ export function ContactForm() {
       )}
     </motion.form>
   )
-} 
+}

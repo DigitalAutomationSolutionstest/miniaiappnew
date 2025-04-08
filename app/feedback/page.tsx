@@ -10,15 +10,15 @@ import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 
 export default function FeedbackPage() {
-  const [form, setForm] = useState({ 
-    email: '', 
-    feedback: '', 
-    rating: '' 
+  const [form, setForm] = useState({
+    email: '',
+    feedback: '',
+    rating: '',
   })
   const [loading, setLoading] = useState(false)
 
   const handleChange = (key: string, value: string) => {
-    setForm(prev => ({ ...prev, [key]: value }))
+    setForm((prev) => ({ ...prev, [key]: value }))
   }
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -32,12 +32,12 @@ export default function FeedbackPage() {
         body: JSON.stringify(form),
       })
 
-      if (!res.ok) throw new Error('Errore nell\'invio del feedback')
+      if (!res.ok) throw new Error("Errore nell'invio del feedback")
 
       toast.success('Grazie per il tuo feedback!')
       setForm({ email: '', feedback: '', rating: '' })
     } catch (err) {
-      toast.error('Errore durante l\'invio del feedback')
+      toast.error("Errore durante l'invio del feedback")
       console.error(err)
     } finally {
       setLoading(false)
@@ -48,7 +48,7 @@ export default function FeedbackPage() {
     <div className="max-w-2xl mx-auto py-12 px-4">
       <Card className="p-6">
         <h1 className="text-3xl font-bold mb-6">Lascia un feedback</h1>
-        
+
         <form onSubmit={handleSubmit} className="space-y-6">
           <div className="space-y-2">
             <Label htmlFor="email">Email</Label>
@@ -88,11 +88,7 @@ export default function FeedbackPage() {
             />
           </div>
 
-          <Button 
-            type="submit" 
-            disabled={loading}
-            className="w-full"
-          >
+          <Button type="submit" disabled={loading} className="w-full">
             {loading ? (
               <>
                 <Loader2 className="mr-2 h-4 w-4 animate-spin" />
@@ -106,4 +102,4 @@ export default function FeedbackPage() {
       </Card>
     </div>
   )
-} 
+}
