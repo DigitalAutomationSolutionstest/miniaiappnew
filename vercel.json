@@ -1,0 +1,10 @@
+{
+  "rewrites": [{ "source": "/(.*)", "destination": "/" }],
+  "redirects": [
+    {
+      "source": "www.miniaiapps.tech",
+      "destination": "https://miniaiapps.tech",
+      "permanent": true
+    }
+  ]
+} 
