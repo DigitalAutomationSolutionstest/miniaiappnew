@@ -1,9 +1,12 @@
 'use client'
 
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 import { Button } from '@/components/ui/button'
+import Link from 'next/link'
+
+export const dynamic = 'force-dynamic'
 
 const tools = [
   {
