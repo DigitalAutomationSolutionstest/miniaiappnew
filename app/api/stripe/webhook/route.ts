@@ -3,6 +3,7 @@ import { headers } from 'next/headers'
 import Stripe from 'stripe'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
+import { CookieOptions } from '@supabase/ssr'
 
 export const dynamic = 'force-dynamic'
 
@@ -11,6 +12,12 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 })
 
 const webhookSecret = process.env.STRIPE_WEBHOOK_SECRET!
+
+interface EmailRequest {
+  email: string;
+  credits: number;
+  amount: number | null;
+}
 
 export async function POST(request: Request) {
   try {
@@ -40,10 +47,10 @@ export async function POST(request: Request) {
           get(name: string) {
             return cookieStore.get(name)?.value
           },
-          set(name: string, value: string, options: any) {
+          set(name: string, value: string, options: CookieOptions) {
             cookieStore.set({ name, value, ...options })
           },
-          remove(name: string, options: any) {
+          remove(name: string, options: CookieOptions) {
             cookieStore.set({ name, value: '', ...options })
           },
         },
@@ -87,16 +94,18 @@ export async function POST(request: Request) {
           .single()
 
         if (userData?.email) {
+          const emailData: EmailRequest = {
+            email: userData.email,
+            credits,
+            amount: session.amount_total
+          }
+          
           await fetch(`${process.env.NEXT_PUBLIC_APP_URL}/api/email/purchase-confirmation`, {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
             },
-            body: JSON.stringify({
-              email: userData.email,
-              credits,
-              amount: session.amount_total,
-            }),
+            body: JSON.stringify(emailData),
           })
         }
 

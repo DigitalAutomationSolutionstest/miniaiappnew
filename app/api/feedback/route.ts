@@ -1,11 +1,18 @@
 import { NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
+import { CookieOptions } from '@supabase/ssr'
 import { Resend } from 'resend'
 
 export const dynamic = 'force-dynamic'
 
 const resend = new Resend(process.env.RESEND_API_KEY)
+
+interface FeedbackRequest {
+  email: string;
+  feedback: string;
+  rating: number;
+}
 
 export async function POST(request: Request) {
   try {
@@ -18,10 +25,10 @@ export async function POST(request: Request) {
           get(name: string) {
             return cookieStore.get(name)?.value
           },
-          set(name: string, value: string, options: any) {
+          set(name: string, value: string, options: CookieOptions) {
             cookieStore.set({ name, value, ...options })
           },
-          remove(name: string, options: any) {
+          remove(name: string, options: CookieOptions) {
             cookieStore.set({ name, value: '', ...options })
           },
         },
@@ -35,7 +42,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
     }
 
-    const { email, feedback, rating } = await request.json()
+    const { email, feedback, rating } = await request.json() as FeedbackRequest
 
     // Validazione
     if (!email || !feedback || !rating) {
@@ -52,7 +59,7 @@ export async function POST(request: Request) {
         user_id: user.id,
         email,
         feedback,
-        rating: parseInt(rating),
+        rating: parseInt(rating.toString()),
         created_at: new Date().toISOString(),
       },
     ])

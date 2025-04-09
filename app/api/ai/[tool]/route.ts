@@ -1,10 +1,15 @@
 import { NextResponse } from 'next/server'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
+import { CookieOptions } from '@supabase/ssr'
 
 export const dynamic = 'force-dynamic'
 
 const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://api.miniaiapps.tech'
+
+interface AIInput {
+  input: string;
+}
 
 export async function POST(request: Request, { params }: { params: { tool: string } }) {
   try {
@@ -17,10 +22,10 @@ export async function POST(request: Request, { params }: { params: { tool: strin
           get(name: string) {
             return cookieStore.get(name)?.value
           },
-          set(name: string, value: string, options: any) {
+          set(name: string, value: string, options: CookieOptions) {
             cookieStore.set({ name, value, ...options })
           },
-          remove(name: string, options: any) {
+          remove(name: string, options: CookieOptions) {
             cookieStore.set({ name, value: '', ...options })
           },
         },
@@ -45,7 +50,7 @@ export async function POST(request: Request, { params }: { params: { tool: strin
       return NextResponse.json({ error: 'Crediti insufficienti' }, { status: 402 })
     }
 
-    const { input } = await request.json()
+    const { input } = await request.json() as AIInput
 
     if (!input?.trim()) {
       return NextResponse.json({ error: 'Input mancante' }, { status: 400 })

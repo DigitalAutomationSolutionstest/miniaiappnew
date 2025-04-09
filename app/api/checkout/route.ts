@@ -2,12 +2,19 @@ import { NextResponse } from 'next/server'
 import Stripe from 'stripe'
 import { createServerClient } from '@supabase/ssr'
 import { cookies } from 'next/headers'
+import { CookieOptions } from '@supabase/ssr'
 
 export const dynamic = 'force-dynamic'
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2025-03-31.basil',
 })
+
+interface CheckoutRequest {
+  planId: string;
+  price: number;
+  credits: number;
+}
 
 export async function POST(request: Request) {
   try {
@@ -20,10 +27,10 @@ export async function POST(request: Request) {
           get(name: string) {
             return cookieStore.get(name)?.value
           },
-          set(name: string, value: string, options: any) {
+          set(name: string, value: string, options: CookieOptions) {
             cookieStore.set({ name, value, ...options })
           },
-          remove(name: string, options: any) {
+          remove(name: string, options: CookieOptions) {
             cookieStore.set({ name, value: '', ...options })
           },
         },
@@ -37,7 +44,7 @@ export async function POST(request: Request) {
       return NextResponse.json({ error: 'Non autorizzato' }, { status: 401 })
     }
 
-    const { planId, price, credits } = await request.json()
+    const { planId, price, credits } = await request.json() as CheckoutRequest
 
     if (!planId || !price || !credits) {
       return NextResponse.json({ error: 'Dati mancanti' }, { status: 400 })
