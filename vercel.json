@@ -14,10 +14,10 @@
   "framework": "nextjs",
   "regions": ["cdg1"],
   "env": {
-    "NEXT_PUBLIC_SUPABASE_URL": "@next_public_supabase_url",
-    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@next_public_supabase_anon_key",
-    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "@next_public_stripe_publishable_key",
-    "NEXT_PUBLIC_APP_URL": "@next_public_app_url"
+    "NEXT_PUBLIC_SUPABASE_URL": "https://nuvvezmucfeaswkmerbs.supabase.co",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im51dnZlem11Y2ZlYXN3a21lcmJzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDQxNDE1NjgsImV4cCI6MjA1OTcxNzU2OH0.UZ26z9EUhlSt9nZRm5aCJGsb_zVhWo_-8VHaK4Xpjj8",
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "pk_live_51R3leNJt2p1HKJxdf3krLOg7zRY2enw4zam3yJHYGjQgPC4GfB79wh4ISYB1GavcGwAtgUqRZaw2YmkH0gmPiGmr00k9j49owK",
+    "NEXT_PUBLIC_APP_URL": "https://www.miniaiapps.tech"
   },
   "headers": [
     {
