@@ -4,7 +4,6 @@ import { useEffect, useState } from 'react'
 import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 import { Button } from '@/components/ui/button'
-import Link from 'next/link'
 import { LogoUploader } from '@/components/LogoUploader'
 
 export const dynamic = 'force-dynamic'

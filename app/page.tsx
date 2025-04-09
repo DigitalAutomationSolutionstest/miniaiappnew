@@ -10,37 +10,29 @@ import Link from 'next/link'
 // Importa i nuovi componenti
 import CustomServicesSection from '@/components/CustomServicesSection'
 import TestimonialsCarousel from '@/components/TestimonialsCarousel'
+import { Features } from '@/components/Features'
+import { Pricing } from '@/components/Pricing'
+import { FAQ } from '@/components/FAQ'
+import { CTA } from '@/components/CTA'
 
 const apps = [
   {
-    title: 'Chatbot AI',
-    description: 'Chatta con un assistente AI intelligente',
-    icon: '🤖',
-    href: '/app/chatbot',
+    title: 'Chat AI',
+    description: 'Chatta con un assistente AI personalizzato',
+    icon: '💬',
+    href: '/chat',
   },
   {
-    title: 'Generatore Siti',
-    description: 'Crea siti web in pochi click',
-    icon: '🌐',
-    href: '/app/sitegen',
+    title: 'Generatore di Immagini',
+    description: 'Crea immagini con l\'intelligenza artificiale',
+    icon: '🎨',
+    href: '/image-generator',
   },
   {
-    title: 'Assistente Codice',
-    description: 'Ottieni aiuto con il tuo codice',
-    icon: '💻',
-    href: '/app/code',
-  },
-  {
-    title: 'Trascrittore Audio',
-    description: 'Trascrivi audio in testo',
-    icon: '🎤',
-    href: '/app/transcribe',
-  },
-  {
-    title: 'Analisi CSV',
-    description: 'Analizza i tuoi dati CSV',
-    icon: '📊',
-    href: '/app/csv',
+    title: 'Assistente di Scrittura',
+    description: 'Scrivi contenuti con l\'aiuto dell\'AI',
+    icon: '✍️',
+    href: '/writing-assistant',
   },
 ]
 
@@ -80,7 +72,7 @@ const benefits = [
   },
 ]
 
-export default function Home() {
+export default function HomePage() {
   return (
     <div className="min-h-screen flex flex-col">
       {/* HERO PRINCIPALE */}
@@ -165,6 +157,11 @@ export default function Home() {
       <TestimonialsCarousel />
 
       <Footer />
+
+      <Features />
+      <Pricing />
+      <FAQ />
+      <CTA />
     </div>
   )
 }

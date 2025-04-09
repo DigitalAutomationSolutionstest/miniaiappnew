@@ -46,7 +46,7 @@ export function LogoUploader() {
         throw new Error(error.message || 'Errore durante il caricamento')
       }
 
-      const data = await response.json()
+      await response.json()
       toast.success('Logo caricato con successo!')
       
       // Aggiorna l'URL del logo nella navbar

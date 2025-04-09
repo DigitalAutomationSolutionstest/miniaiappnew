@@ -3,7 +3,8 @@
 import { motion } from 'framer-motion'
 import Link from 'next/link'
 import { Button } from '@/components/ui/button'
-import { WaitlistForm } from './WaitlistForm'
+import { Input } from '@/components/ui/input'
+import { toast } from 'sonner'
 
 interface CtaProps {
   text: string
@@ -18,6 +19,32 @@ interface HeroProps {
 }
 
 export function Hero({ title, subtitle, cta1, cta2 }: HeroProps) {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    const form = e.currentTarget
+    const email = new FormData(form).get('email') as string
+
+    try {
+      const response = await fetch('/api/waitlist', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email }),
+      })
+
+      if (!response.ok) {
+        throw new Error('Errore durante l\'iscrizione')
+      }
+
+      toast.success('Grazie per esserti iscritto!')
+      form.reset()
+    } catch (error) {
+      toast.error('Errore durante l\'iscrizione')
+      console.error(error)
+    }
+  }
+
   return (
     <section className="relative isolate overflow-hidden bg-gradient-to-b from-primary/10 via-background to-background pt-14 pb-20 sm:pb-32">
       <div className="absolute inset-y-0 right-1/2 -z-10 -mr-96 w-[200%] origin-top-right skew-x-[-30deg] bg-background shadow-xl shadow-primary/10 ring-1 ring-primary/5 sm:-mr-80 lg:-mr-96" />
@@ -47,6 +74,16 @@ export function Hero({ title, subtitle, cta1, cta2 }: HeroProps) {
             </div>
           </div>
         </motion.div>
+        <div className="mt-10 flex max-w-md mx-auto gap-x-4">
+          <Input
+            type="email"
+            name="email"
+            placeholder="Inserisci la tua email"
+            required
+            className="min-w-0 flex-auto"
+          />
+          <Button type="submit">Iscriviti</Button>
+        </div>
       </div>
       <div className="absolute inset-x-0 bottom-0 -z-10 h-24 bg-gradient-to-t from-background sm:h-32" />
     </section>
