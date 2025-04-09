@@ -10,10 +10,6 @@ import Link from 'next/link'
 // Importa i nuovi componenti
 import CustomServicesSection from '@/components/CustomServicesSection'
 import TestimonialsCarousel from '@/components/TestimonialsCarousel'
-import { Features } from '@/components/Features'
-import { Pricing } from '@/components/Pricing'
-import { FAQ } from '@/components/FAQ'
-import { CTA } from '@/components/CTA'
 
 const apps = [
   {
@@ -157,11 +153,6 @@ export default function HomePage() {
       <TestimonialsCarousel />
 
       <Footer />
-
-      <Features />
-      <Pricing />
-      <FAQ />
-      <CTA />
     </div>
   )
 }
