@@ -7,34 +7,25 @@ import { toast } from 'sonner'
 import { Loader2 } from 'lucide-react'
 
 export function LogoUploader() {
-  const [isLoading, setIsLoading] = useState(false)
-  const [selectedFile, setSelectedFile] = useState<File | null>(null)
+  const [file, setFile] = useState<File | null>(null)
+  const [loading, setLoading] = useState(false)
 
-  const handleFileSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0]
-    if (file) {
-      if (file.size > 5 * 1024 * 1024) { // 5MB limit
-        toast.error('Il file è troppo grande. Dimensione massima: 5MB')
-        return
-      }
-      if (!file.type.startsWith('image/')) {
-        toast.error('Per favore seleziona un file immagine')
-        return
-      }
-      setSelectedFile(file)
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files && e.target.files[0]) {
+      setFile(e.target.files[0])
     }
   }
 
   const handleUpload = async () => {
-    if (!selectedFile) {
-      toast.error('Per favore seleziona un file prima di caricare')
+    if (!file) {
+      toast.error('Seleziona un file da caricare')
       return
     }
 
+    setLoading(true)
     try {
-      setIsLoading(true)
       const formData = new FormData()
-      formData.append('file', selectedFile)
+      formData.append('file', file)
 
       const response = await fetch('/api/upload', {
         method: 'POST',
@@ -42,53 +33,37 @@ export function LogoUploader() {
       })
 
       if (!response.ok) {
-        const error = await response.json()
-        throw new Error(error.message || 'Errore durante il caricamento')
+        throw new Error('Errore durante il caricamento')
       }
 
-      await response.json()
       toast.success('Logo caricato con successo!')
-      
-      // Aggiorna l'URL del logo nella navbar
-      window.location.reload()
+      setFile(null)
     } catch (error) {
-      console.error('Errore durante il caricamento:', error)
-      toast.error(error instanceof Error ? error.message : 'Errore durante il caricamento del logo')
+      toast.error('Errore durante il caricamento del logo')
+      console.error('Errore:', error)
     } finally {
-      setIsLoading(false)
+      setLoading(false)
     }
   }
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-4">
-        <Input
-          type="file"
-          accept="image/*"
-          onChange={handleFileSelect}
-          disabled={isLoading}
-          className="max-w-[200px]"
-        />
-        <Button 
-          onClick={handleUpload}
-          disabled={isLoading || !selectedFile}
-          className="min-w-[120px]"
-        >
-          {isLoading ? (
-            <>
-              <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              Caricamento...
-            </>
-          ) : (
-            'Carica Logo'
-          )}
-        </Button>
-      </div>
-      {selectedFile && (
-        <p className="text-sm text-muted-foreground">
-          File selezionato: {selectedFile.name} ({(selectedFile.size / 1024 / 1024).toFixed(2)}MB)
-        </p>
-      )}
+      <Input
+        type="file"
+        accept="image/*"
+        onChange={handleFileChange}
+        disabled={loading}
+      />
+      <Button onClick={handleUpload} disabled={!file || loading}>
+        {loading ? (
+          <>
+            <Loader2 className="mr-2 h-4 w-4 animate-spin" />
+            Caricamento...
+          </>
+        ) : (
+          'Carica Logo'
+        )}
+      </Button>
     </div>
   )
 } 

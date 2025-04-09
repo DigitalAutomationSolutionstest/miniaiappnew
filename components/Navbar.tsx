@@ -6,44 +6,44 @@ import { ThemeToggle } from '@/components/ThemeToggle'
 
 export function Navbar() {
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-16 items-center">
+    <nav className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-14 items-center">
         <div className="mr-4 flex">
-          <Link href="/" className="mr-6 flex items-center space-x-3">
+          <Link href="/" className="mr-6 flex items-center space-x-2">
             <Image
-              src="https://c2q8ic9cgnoq97fq.public.blob.vercel-storage.com/logo-xwTqDmVqvV3O6R2hwIFLUra7WhVJH0.png"
-              alt="Mini Ai App Logo"
-              width={40}
-              height={40}
-              priority
+              src="/logo.png"
+              alt="Mini AI App Logo"
+              width={32}
+              height={32}
+              className="rounded-full"
             />
-            <span className="font-bold text-lg">Mini Ai App</span>
+            <span className="font-bold">Mini AI App</span>
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
           <nav className="flex items-center space-x-6">
             <Link
-              href="/"
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              Home
-            </Link>
-            <Link
-              href="/#features"
-              className="text-sm font-medium transition-colors hover:text-primary"
-            >
-              Mini App AI
-            </Link>
-            <Link
               href="/services"
-              className="text-sm font-bold text-primary underline underline-offset-4 decoration-wavy transition-colors hover:text-primary/80"
+              className="text-sm font-medium transition-colors hover:text-primary"
             >
-              Richiedi Progetto
+              Servizi
             </Link>
-            <ThemeToggle />
+            <Link
+              href="/pricing"
+              className="text-sm font-medium transition-colors hover:text-primary"
+            >
+              Prezzi
+            </Link>
+            <Link
+              href="/login"
+              className="text-sm font-medium transition-colors hover:text-primary"
+            >
+              Accedi
+            </Link>
           </nav>
+          <ThemeToggle />
         </div>
       </div>
-    </header>
+    </nav>
   )
 }
