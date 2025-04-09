@@ -1,7 +1,7 @@
 'use client'
 
 import { motion } from 'framer-motion'
-import CustomProjectForm from '@/components/CustomProjectForm'
+import { CustomProjectForm } from '@/components/CustomProjectForm'
 import { Footer } from '@/components/Footer'
 import { Navbar } from '@/components/Navbar'
 
