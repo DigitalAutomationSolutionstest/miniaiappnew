@@ -6,5 +6,13 @@
       "destination": "https://miniaiapps.tech",
       "permanent": true
     }
-  ]
+  ],
+  "buildCommand": "next build",
+  "devCommand": "next dev",
+  "installCommand": "npm install",
+  "framework": "nextjs",
+  "regions": ["cdg1"],
+  "env": {
+    "BLOB_READ_WRITE_TOKEN": "@blob_read_write_token"
+  }
 }
