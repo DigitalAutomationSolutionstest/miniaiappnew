@@ -10,6 +10,13 @@ export function Navbar() {
       <div className="container flex h-16 items-center">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-3">
+            <Image
+              src="https://c2q8ic9cgnoq97fq.public.blob.vercel-storage.com/logo-xwTqDmVqvV3O6R2hwIFLUra7WhVJH0.png"
+              alt="Mini Ai App Logo"
+              width={40}
+              height={40}
+              priority
+            />
             <span className="font-bold text-lg">Mini Ai App</span>
           </Link>
         </div>
