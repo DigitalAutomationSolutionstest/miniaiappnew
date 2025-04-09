@@ -1,15 +1,23 @@
 'use client'
 
 import Link from 'next/link'
+import Image from 'next/image'
 import { ThemeToggle } from '@/components/ThemeToggle'
 
 export function Navbar() {
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-      <div className="container flex h-14 items-center">
+      <div className="container flex h-16 items-center">
         <div className="mr-4 flex">
-          <Link href="/" className="mr-6 flex items-center space-x-2">
-            <span className="font-bold">Mini AI Apps</span>
+          <Link href="/" className="mr-6 flex items-center space-x-3">
+            <Image
+              src="/logo.png"
+              alt="Mini Ai App Logo"
+              width={40}
+              height={40}
+              className="rounded-md"
+            />
+            <span className="font-bold text-lg">Mini Ai App</span>
           </Link>
         </div>
         <div className="flex flex-1 items-center justify-between space-x-2 md:justify-end">
