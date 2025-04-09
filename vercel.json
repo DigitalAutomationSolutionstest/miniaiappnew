@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "rewrites": [{ "source": "/(.*)", "destination": "/" }],
   "redirects": [
     {
@@ -13,6 +14,32 @@
   "framework": "nextjs",
   "regions": ["cdg1"],
   "env": {
-    "BLOB_READ_WRITE_TOKEN": "@blob_read_write_token"
-  }
+    "NEXT_PUBLIC_SUPABASE_URL": "@next_public_supabase_url",
+    "NEXT_PUBLIC_SUPABASE_ANON_KEY": "@next_public_supabase_anon_key",
+    "NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY": "@next_public_stripe_publishable_key",
+    "NEXT_PUBLIC_APP_URL": "@next_public_app_url"
+  },
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        },
+        {
+          "key": "Referrer-Policy",
+          "value": "strict-origin-when-cross-origin"
+        }
+      ]
+    }
+  ]
 }

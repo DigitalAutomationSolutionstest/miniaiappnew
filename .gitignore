@@ -1,3 +1,5 @@
+# See https://help.github.com/articles/ignoring-files/ for more about ignoring files.
+
 # dependencies
 /node_modules
 /.pnp
@@ -32,6 +34,32 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# IDE
+.idea
+.vscode
+
+# Logs
+logs
+*.log
+
+# Cache
+.cache
+.npm
+.eslintcache
+
+# Build
+dist
+build
+
+# Temporary files
+*.swp
+*.swo
+*~
+
+# System Files
+.DS_Store
+Thumbs.db
 
 # Evita di tracciare il logo localmente
 /public/logo.png 
