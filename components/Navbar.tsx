@@ -10,13 +10,6 @@ export function Navbar() {
       <div className="container flex h-16 items-center">
         <div className="mr-4 flex">
           <Link href="/" className="mr-6 flex items-center space-x-3">
-            <Image
-              src="/logo.png"
-              alt="Mini Ai App Logo"
-              width={40}
-              height={40}
-              className="rounded-md"
-            />
             <span className="font-bold text-lg">Mini Ai App</span>
           </Link>
         </div>

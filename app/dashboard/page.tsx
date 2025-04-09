@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation'
 import { useAuth } from '@/hooks/useAuth'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
+import { LogoUploader } from '@/components/LogoUploader'
 
 export const dynamic = 'force-dynamic'
 
@@ -86,6 +87,10 @@ export default function DashboardPage() {
               </div>
             </div>
           ))}
+        </div>
+        <div className="space-y-4">
+          <h2 className="text-2xl font-bold">Gestione Logo</h2>
+          <LogoUploader />
         </div>
       </main>
     </div>
