@@ -1,4 +1,3 @@
-import type { Metadata } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -7,7 +6,7 @@ import { Footer } from '@/components/Footer'
 
 const inter = Inter({ subsets: ['latin'] })
 
-export const metadata: Metadata = {
+export const metadata = {
   title: 'Mini Ai App – Intelligenza artificiale su misura',
   description:
     "Crea il tuo sito web o la tua app AI su misura con Digital Automaton Solutions. Utilizza anche le nostre potenti mini-app AI pronte all'uso.",
