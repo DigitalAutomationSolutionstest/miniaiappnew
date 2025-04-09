@@ -1,4 +1,4 @@
-import Metadata from 'next'
+import { Metadata } from 'next/types'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { ThemeProvider } from '@/components/ThemeProvider'
@@ -11,11 +11,13 @@ export const metadata: Metadata = {
   title: 'Mini Ai App – Intelligenza artificiale su misura',
   description:
     "Crea il tuo sito web o la tua app AI su misura con Digital Automaton Solutions. Utilizza anche le nostre potenti mini-app AI pronte all'uso.",
-  authors: [{ name: 'Digital Automaton Solutions' }],
-  keywords: 'intelligenza artificiale, sviluppo web, app ai, siti web, openai, custom software',
 }
 
-export default function RootLayout({ children }: { children: React.ReactNode }) {
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode
+}) {
   return (
     <html lang="it" suppressHydrationWarning>
       <body className={inter.className}>
